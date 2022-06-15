@@ -1,4 +1,4 @@
-namespace Game.Logic.GameState
+namespace Game.Logic.State
 {
     public interface IGameState
     {
@@ -9,9 +9,9 @@ namespace Game.Logic.GameState
     
     public abstract class GameState : IGameState
     {
-        protected GameLogic game;
+        protected GamePresenter game;
 
-        protected GameState(GameLogic managedGame)
+        protected GameState(GamePresenter managedGame)
         {
             game = managedGame;
         }

@@ -8,9 +8,9 @@ namespace Game.Object
 {
     public class DropData
     {
-        public int CenterId { get; }
-        public int Side1Id { get; }
-        public int Side2Id { get; }
+        public int CenterId { get; private set; }
+        public int Side1Id { get; private set; }
+        public int Side2Id { get; private set; }
 
         public PositionType Side1Pos { get; private set; }
         public PositionType Side2Pos { get; private set; }
@@ -19,19 +19,32 @@ namespace Game.Object
         public int Row { get; private set; }
         public int Depth { get; private set; }
 
-        public UnityEvent onShapeChanged = new();
-        public UnityEvent onRotated = new();
-        public UnityEvent onPositionUpdated = new();
+        public readonly UnityEvent onInitialize = new();
+        public readonly UnityEvent onShapeChanged = new();
+        public readonly UnityEvent onRotated = new();
+        public readonly UnityEvent onPositionUpdated = new();
 
-        public DropData(int center = 0, int side1 = 0, int side2 = 0, int initialDepth = 10)
+        public DropData(int center = 0, int side1 = 0, int side2 = 0, PositionType side1Pos = PositionType.Top,
+            PositionType side2Pos = PositionType.Bottom, int initialDepth = 10)
+        {
+            Initialize(center, side1, side2, side1Pos, side2Pos, initialDepth);
+        }
+
+        public void Initialize(int center = 0, int side1 = 0, int side2 = 0, PositionType side1Pos = PositionType.Top,
+            PositionType side2Pos = PositionType.Bottom, int initialDepth = 10)
         {
             CenterId = center;
             Side1Id = side1;
             Side2Id = side2;
 
+            Side1Pos = side1Pos;
+            Side2Pos = side2Pos;
+
             Column = 2;
             Row = 2;
             Depth = initialDepth;
+
+            onInitialize.Invoke();
         }
 
         public void ChangeShape()
@@ -42,6 +55,8 @@ namespace Game.Object
             {
                 Side1Pos = Side1Pos.RotateCW();
             }
+            
+            UpdatePosition(Column, Row);
 
             onShapeChanged.Invoke();
         }
@@ -101,14 +116,14 @@ namespace Game.Object
             var cookie1 = Random.Range(0, 4);
             var cookie2 = Random.Range(0, 4);
             var cookie3 = Random.Range(0, 4);
-
-            var randomData = new DropData(cookie1, cookie2, cookie3);
-
+            
             var randomIndex1 = Random.Range(0, 4);
             var randomIndex2 = (randomIndex1 + Random.Range(1, 4)) % 4;
             
-            randomData.Side1Pos = (PositionType)randomIndex1;
-            randomData.Side2Pos = (PositionType)randomIndex2;
+            var side1Pos = (PositionType)randomIndex1;
+            var side2Pos = (PositionType)randomIndex2;
+
+            var randomData = new DropData(cookie1, cookie2, cookie3, side1Pos, side2Pos, 0);
             
             return randomData;
         }
@@ -129,20 +144,13 @@ namespace Game.Object
 
         private DropData _data;
 
-        public void Start()
-        {
-            Bind(DropData.GetRandomData());
-        }
-
         public void Bind(DropData dropData)
         { 
             Unbind();
 
             _data = dropData;
             
-            UpdateSprites();
-            UpdateFormation();
-            
+            _data.onInitialize.AddListener(Initialize);
             _data.onRotated.AddListener(UpdateFormation);
             _data.onShapeChanged.AddListener(UpdateFormation);
             _data.onPositionUpdated.AddListener(UpdatePosition);
@@ -155,8 +163,17 @@ namespace Game.Object
                 return;
             }
             
+            _data.onInitialize.RemoveListener(Initialize);
             _data.onRotated.RemoveListener(UpdateFormation);
             _data.onShapeChanged.RemoveListener(UpdateFormation);
+            _data.onPositionUpdated.RemoveListener(UpdatePosition);
+        }
+
+        private void Initialize()
+        {
+            UpdateSprites();
+            UpdateFormation();
+            UpdatePosition();
         }
 
         private void UpdateSprites()
@@ -174,8 +191,17 @@ namespace Game.Object
 
         private void UpdatePosition()
         {
-            transform.localPosition = new Vector3(-2 + _data.Column, -2 + _data.Row, -9f);
-            transform.localScale = Vector3.one * (1f + _data.Depth * 0.2f);
+            transform.position = new Vector3(-2 + _data.Column, -2 + _data.Row, -9f);
+            transform.localScale = Vector3.one * (1f + _data.Depth * 0.05f);
+            SetAlpha(1f - _data.Depth * 0.05f);
+        }
+
+        private void SetAlpha(float alpha)
+        {
+            var newColor = new Color(1f, 1f, 1, alpha);
+            centerSprite.color = newColor;
+            sideSprite1.color = newColor;
+            sideSprite2.color = newColor;
         }
 
         private void SetSprite(SpriteRenderer cookieSprite, int id)
