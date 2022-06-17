@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game.Logic.State;
 using UnityEngine;
 
 public class StoryScenePresenter : MonoBehaviour
@@ -15,5 +17,19 @@ public class StoryScenePresenter : MonoBehaviour
     private void BindViewCallbacks()
     {
         view.onEnlargeButtonClicked.AddListener(model.OnClickEnlargeButton);
+    }
+
+    private void EnlargeModeToogleShow(bool show)
+    {
+        view.textMainBase.SetActive(show);
+    }
+
+    private void FixedUpdate()
+    {
+        if (model.isValueUpdated)
+        {
+            EnlargeModeToogleShow(!model.isEnlargeMode);
+            model.isValueUpdated = false;
+        }
     }
 }

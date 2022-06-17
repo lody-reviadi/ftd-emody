@@ -8,5 +8,7 @@ public class StorySceneView : MonoBehaviour
 {
     [Header("Controls")]
     [SerializeField] private Button enlargeButton;
+
+    [SerializeField] public GameObject textMainBase;
     public Button.ButtonClickedEvent onEnlargeButtonClicked => enlargeButton.onClick;
 }
