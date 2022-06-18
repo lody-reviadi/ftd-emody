@@ -26,11 +26,17 @@ public class StoryScenePresenter : MonoBehaviour
         view.textMainBase.SetActive(show);
     }
 
+    private void UpdateStoryData(string storyText, int backgroundIndex)
+    {
+        view.storyTextView.text = storyText;
+    }
+
     private void FixedUpdate()
     {
         if (model.isValueUpdated)
         {
             EnlargeModeToogleShow(!model.isEnlargeMode);
+            UpdateStoryData(model.storyDataText, model.storyBackgroundIndex);
             model.isValueUpdated = false;
         }
     }

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class StorySceneView : MonoBehaviour
 {
     [SerializeField] public GameObject textMainBase;
+    [SerializeField] public Text storyTextView;
     [Header("Controls")]
     [SerializeField] private Button enlargeButton;
     [SerializeField] private Button skipButton;

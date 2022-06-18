@@ -8,26 +8,23 @@ public class StorySceneModel
     private const string STORY_TEXT_PATH = "story";
     private bool _isEnlargeMode = false;
     private bool _isValueUpdated = false;
+    private int _currentStoryIndex = 0;
     private StoryDatas _storyDatas;
 
-    [System.Serializable]
-    private class StoryDatas
+    public string storyDataText
     {
-        public StoryData[] stories;
+        get
+        {
+            return _storyDatas.stories[_currentStoryIndex].text;
+        }
     }
 
-    [System.Serializable]
-
-    private class StoryData
+    public int storyBackgroundIndex
     {
-        public string text;
-        public int background;
-    }
-
-    public void Init()
-    {
-        string storyJson = Resources.Load<TextAsset>(STORY_TEXT_PATH).ToString();
-        _storyDatas = JsonUtility.FromJson<StoryDatas>(storyJson);
+        get
+        {
+            return _storyDatas.stories[_currentStoryIndex].background;
+        }
     }
 
     public bool isValueUpdated
@@ -48,6 +45,27 @@ public class StorySceneModel
         {
             return _isEnlargeMode;
         }
+    }
+
+    [System.Serializable]
+    private class StoryDatas
+    {
+        public StoryData[] stories;
+    }
+
+    [System.Serializable]
+
+    private class StoryData
+    {
+        public string text;
+        public int background;
+    }
+
+    public void Init()
+    {
+        string storyJson = Resources.Load<TextAsset>(STORY_TEXT_PATH).ToString();
+        _storyDatas = JsonUtility.FromJson<StoryDatas>(storyJson);
+        _isValueUpdated = true;
     }
     
     public void OnClickEnlargeButton()
