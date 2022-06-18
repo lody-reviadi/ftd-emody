@@ -19,6 +19,7 @@ public class StoryScenePresenter : MonoBehaviour
     {
         view.onEnlargeButtonClicked.AddListener(model.OnClickEnlargeButton);
         view.onSkipButtonClicked.AddListener(model.OnClickSkipButton);
+        view.onTextPlayButtonClicked.AddListener(model.OnClickTextPlayButton);
     }
 
     private void EnlargeModeToogleShow(bool show)

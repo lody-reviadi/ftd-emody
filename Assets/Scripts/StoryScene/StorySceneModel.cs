@@ -78,4 +78,10 @@ public class StorySceneModel
     {
         SceneManager.LoadScene("SampleScene");
     }
+
+    public void OnClickTextPlayButton()
+    {
+        _currentStoryIndex = Mathf.Min(_currentStoryIndex + 1, _storyDatas.stories.Length - 1);
+        _isValueUpdated = true;
+    }
 }

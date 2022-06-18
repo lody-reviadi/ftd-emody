@@ -11,7 +11,9 @@ public class StorySceneView : MonoBehaviour
     [Header("Controls")]
     [SerializeField] private Button enlargeButton;
     [SerializeField] private Button skipButton;
+    [SerializeField] private Button textPlayButton;
 
     public Button.ButtonClickedEvent onEnlargeButtonClicked => enlargeButton.onClick;
     public Button.ButtonClickedEvent onSkipButtonClicked => skipButton.onClick;
+    public Button.ButtonClickedEvent onTextPlayButtonClicked => textPlayButton.onClick;
 }
