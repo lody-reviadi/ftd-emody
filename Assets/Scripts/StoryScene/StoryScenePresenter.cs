@@ -7,16 +7,18 @@ using UnityEngine;
 public class StoryScenePresenter : MonoBehaviour
 {
     [SerializeField] private StorySceneView view;
-    public readonly StorySceneModel model = new();
+    public readonly StorySceneModel model = new StorySceneModel();
     
     void Start()
     {
         BindViewCallbacks();
+        model.Init();
     }
 
     private void BindViewCallbacks()
     {
         view.onEnlargeButtonClicked.AddListener(model.OnClickEnlargeButton);
+        view.onSkipButtonClicked.AddListener(model.OnClickSkipButton);
     }
 
     private void EnlargeModeToogleShow(bool show)
