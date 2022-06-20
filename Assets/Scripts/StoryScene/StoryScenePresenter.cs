@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Game.Logic.State;
+using UniRx;
 using UnityEngine;
 
 public class StoryScenePresenter : MonoBehaviour
@@ -12,6 +13,7 @@ public class StoryScenePresenter : MonoBehaviour
     void Start()
     {
         BindViewCallbacks();
+        BindModelSubscription();
         model.Init();
     }
 
@@ -20,6 +22,14 @@ public class StoryScenePresenter : MonoBehaviour
         view.onEnlargeButtonClicked.AddListener(model.OnClickEnlargeButton);
         view.onSkipButtonClicked.AddListener(model.OnClickSkipButton);
         view.onTextPlayButtonClicked.AddListener(model.OnClickTextPlayButton);
+    }
+    
+    private void BindModelSubscription()
+    {
+        model.isEnlargeMode.Subscribe(isEnlarge =>
+        {
+            EnlargeModeToggleShow(!isEnlarge);
+        });
     }
 
     private void EnlargeModeToggleShow(bool show)
@@ -36,7 +46,6 @@ public class StoryScenePresenter : MonoBehaviour
     {
         if (model.isValueUpdated)
         {
-            EnlargeModeToggleShow(!model.isEnlargeMode);
             UpdateStoryData(model.storyDataText, model.storyBackgroundIndex);
             model.isValueUpdated = false;
         }

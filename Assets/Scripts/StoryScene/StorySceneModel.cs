@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class StorySceneModel
 {
     private const string STORY_TEXT_PATH = "story";
-    private bool _isEnlargeMode = false;
+    private readonly BoolReactiveProperty _isEnlargeMode = new();
+    public IReadOnlyReactiveProperty<bool> isEnlargeMode => _isEnlargeMode;
     private bool _isValueUpdated = false;
     private int _currentStoryIndex = 0;
     private StoryDatas _storyDatas;
@@ -39,14 +41,6 @@ public class StorySceneModel
         }
     }
 
-    public bool isEnlargeMode
-    {
-        get
-        {
-            return _isEnlargeMode;
-        }
-    }
-
     [System.Serializable]
     private class StoryDatas
     {
@@ -65,13 +59,13 @@ public class StorySceneModel
     {
         string storyJson = Resources.Load<TextAsset>(STORY_TEXT_PATH).ToString();
         _storyDatas = JsonUtility.FromJson<StoryDatas>(storyJson);
+        _isEnlargeMode.Value = false;
         _isValueUpdated = true;
     }
     
     public void OnClickEnlargeButton()
     {
-        _isEnlargeMode = !_isEnlargeMode;
-        _isValueUpdated = true;
+        _isEnlargeMode.Value = !_isEnlargeMode.Value;
     }
 
     public void OnClickSkipButton()
