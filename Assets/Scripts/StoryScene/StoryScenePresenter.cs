@@ -30,6 +30,11 @@ public class StoryScenePresenter : MonoBehaviour
         {
             EnlargeModeToggleShow(!isEnlarge);
         });
+        
+        model.currentStoryIndex.Subscribe(currentStoryIndex =>
+        {
+            UpdateStoryData(model.storyDataText, model.storyBackgroundIndex);
+        });
     }
 
     private void EnlargeModeToggleShow(bool show)
@@ -40,14 +45,5 @@ public class StoryScenePresenter : MonoBehaviour
     private void UpdateStoryData(string storyText, int backgroundIndex)
     {
         view.storyTextView.text = storyText;
-    }
-
-    private void FixedUpdate()
-    {
-        if (model.isValueUpdated)
-        {
-            UpdateStoryData(model.storyDataText, model.storyBackgroundIndex);
-            model.isValueUpdated = false;
-        }
     }
 }

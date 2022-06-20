@@ -7,17 +7,18 @@ using UnityEngine.SceneManagement;
 public class StorySceneModel
 {
     private const string STORY_TEXT_PATH = "story";
-    private readonly BoolReactiveProperty _isEnlargeMode = new();
+    private readonly BoolReactiveProperty _isEnlargeMode = new(false);
     public IReadOnlyReactiveProperty<bool> isEnlargeMode => _isEnlargeMode;
-    private bool _isValueUpdated = false;
-    private int _currentStoryIndex = 0;
+    
+    private readonly IntReactiveProperty _currentStoryIndex = new(-1);
+    public IReadOnlyReactiveProperty<int> currentStoryIndex => _currentStoryIndex;
     private StoryDatas _storyDatas;
 
     public string storyDataText
     {
         get
         {
-            return _storyDatas.stories[_currentStoryIndex].text;
+            return _currentStoryIndex.Value > -1 ? _storyDatas.stories[_currentStoryIndex.Value].text : "";
         }
     }
 
@@ -25,19 +26,7 @@ public class StorySceneModel
     {
         get
         {
-            return _storyDatas.stories[_currentStoryIndex].background;
-        }
-    }
-
-    public bool isValueUpdated
-    {
-        get
-        {
-            return _isValueUpdated;
-        }
-        set
-        {
-            _isValueUpdated = value;
+            return _currentStoryIndex.Value > -1 ? _storyDatas.stories[_currentStoryIndex.Value].background : 0;
         }
     }
 
@@ -60,7 +49,7 @@ public class StorySceneModel
         string storyJson = Resources.Load<TextAsset>(STORY_TEXT_PATH).ToString();
         _storyDatas = JsonUtility.FromJson<StoryDatas>(storyJson);
         _isEnlargeMode.Value = false;
-        _isValueUpdated = true;
+        _currentStoryIndex.Value = 0;
     }
     
     public void OnClickEnlargeButton()
@@ -75,7 +64,8 @@ public class StorySceneModel
 
     public void OnClickTextPlayButton()
     {
-        _currentStoryIndex = Mathf.Min(_currentStoryIndex + 1, _storyDatas.stories.Length - 1);
-        _isValueUpdated = true;
+        _currentStoryIndex.Value = Mathf.Min(
+            _currentStoryIndex.Value + 1, _storyDatas.stories.Length - 1
+            );
     }
 }
