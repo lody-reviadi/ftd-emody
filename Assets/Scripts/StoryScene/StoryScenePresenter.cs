@@ -22,7 +22,7 @@ public class StoryScenePresenter : MonoBehaviour
         view.onTextPlayButtonClicked.AddListener(model.OnClickTextPlayButton);
     }
 
-    private void EnlargeModeToogleShow(bool show)
+    private void EnlargeModeToggleShow(bool show)
     {
         view.textMainBase.SetActive(show);
     }
@@ -36,7 +36,7 @@ public class StoryScenePresenter : MonoBehaviour
     {
         if (model.isValueUpdated)
         {
-            EnlargeModeToogleShow(!model.isEnlargeMode);
+            EnlargeModeToggleShow(!model.isEnlargeMode);
             UpdateStoryData(model.storyDataText, model.storyBackgroundIndex);
             model.isValueUpdated = false;
         }
