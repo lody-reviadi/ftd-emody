@@ -3,12 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using Game.Logic.State;
 using UniRx;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class StoryScenePresenter : MonoBehaviour
 {
     [SerializeField] private StorySceneView view;
     public readonly StorySceneModel model = new StorySceneModel();
+    
+    private BGMManager _bgmManager;
+    public BGMManager bgmManager;
+
+    private void Awake()
+    {
+        _bgmManager = GameObject.FindObjectOfType<BGMManager>();
+    }
     
     void Start()
     {
