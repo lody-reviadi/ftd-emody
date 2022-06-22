@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d587cc3baacc48469f5ce8f86e178152, type: 3}
+  m_Name: ScriptableInstaller
+  m_EditorClassIdentifier: 
+  protoAudioManagerPrefab: {fileID: 5632635384316760140, guid: fbaa24f78529845f98f4a48cba502694, type: 3}
