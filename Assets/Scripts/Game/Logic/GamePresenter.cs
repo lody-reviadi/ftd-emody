@@ -30,11 +30,6 @@ namespace Game.Logic
 
         private void BindModelProperties()
         {
-            model.Score.Subscribe((updatedScore) =>
-            {
-
-            }).AddTo(this);
-
             model.CookieCount.Subscribe((updatedCount) =>
             {
                 view.UpdateCookieCounter(updatedCount);
@@ -42,7 +37,7 @@ namespace Game.Logic
 
             model.Stage.Subscribe((updatedStage) =>
             {
-
+                view.UpdateStageCounter(updatedStage);
             }).AddTo(this);
 
             model.Drop.Subscribe((dropData) =>
@@ -53,6 +48,11 @@ namespace Game.Logic
             model.Board.ObserveReplace().Subscribe((evt) =>
             {
                 view.SetCookieSprites(evt.Index, evt.NewValue);
+            }).AddTo(this);
+
+            model.Board.ObserveAdd().Subscribe(evt =>
+            {
+                view.SetCookieSprites(evt.Index, evt.Value);
             }).AddTo(this);
         }
 

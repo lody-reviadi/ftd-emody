@@ -13,6 +13,9 @@ namespace Game.Logic
         [SerializeField] private DropObject dropObject;
         public DropObject DropObject => dropObject;
         
+        [SerializeField] private TMP_Text stageCounter;
+        [SerializeField] private string stageCounterFormat = "STAGE {0}";
+        
         [SerializeField] private TMP_Text cookieCounter;
         [SerializeField] private string counterFormat = "x {0}";
         
@@ -62,12 +65,19 @@ namespace Game.Logic
         
         public void ShowGameStartNotification()
         {
+            gameStartNotification.gameObject.SetActive(true);
             gameStartNotification.Show();
         }
 
         public void UpdateCookieCounter(int newCount)
         {
+            gameStartNotification.gameObject.SetActive(false);
             cookieCounter.text = string.Format(counterFormat, newCount);
+        }
+        
+        public void UpdateStageCounter(int stageNum)
+        {
+            stageCounter.text = string.Format(stageCounterFormat, stageNum);
         }
     }
 }

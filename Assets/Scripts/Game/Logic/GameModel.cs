@@ -10,9 +10,6 @@ namespace Game.Logic
         public int Column { get; private set; }
 
         public int Row { get; private set; }
-        public IReadOnlyReactiveProperty<int> Score => _score;
-
-        private readonly IntReactiveProperty _score = new();
 
         public IReadOnlyReactiveProperty<int> CookieCount => _cookieCount;
         private readonly IntReactiveProperty _cookieCount = new();
@@ -32,11 +29,16 @@ namespace Game.Logic
         public void InitGameModel()
         {
             _stage.Value = 1;
-            _score.Value = 0;
-            _cookieCount.Value = 99;
             
             Column = 5;
             Row = 5;
+            
+            SetStageVariables();
+        }
+
+        private void SetStageVariables()
+        {
+            _cookieCount.Value = Mathf.Max((100 - (_stage.Value - 1) * 5), 15);
             
             _board.Clear();
             for (var i = 0; i < Column * Row; i++)
@@ -125,15 +127,12 @@ namespace Game.Logic
 
             return _board[col + row * Column];
         }
-        
-        public void UpdateScore(int add)
-        {
-            _score.Value += add;
-        }
 
         public void NextStage()
         {
             _stage.Value++;
+            
+            SetStageVariables();
         }
 
         public float GetGameTick()

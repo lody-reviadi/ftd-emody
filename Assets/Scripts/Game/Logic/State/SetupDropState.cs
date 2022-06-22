@@ -4,6 +4,7 @@ namespace Game.Logic.State
     {
         public SetupDropState(GamePresenter managedGame) : base(managedGame)
         {
+            
         }
 
         public override void EnterState()

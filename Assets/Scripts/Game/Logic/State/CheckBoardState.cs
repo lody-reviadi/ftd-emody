@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Game.Logic.State
 {
@@ -16,20 +17,36 @@ namespace Game.Logic.State
 
             _groupedIndex.Clear();
 
-            CheckForGroups();
-
+            if (!CheckForGroups() 
+                && CheckGameClear())
+            {
+                game.model.NextStage();
+            }
+            
             game.SetState(new SetupDropState(game));
         }
 
-        private void CheckForGroups()
+        private bool CheckForGroups()
         {
             CheckHorizontalGroups();
             CheckVerticalGroups();
+
+            if (_groupedIndex.Count <= 0)
+            {
+                return false;
+            }
             
             foreach (var i in _groupedIndex)
             {
                 game.model.ClearCookie(i);
             }
+
+            return true;
+        }
+
+        private bool CheckGameClear()
+        {
+            return !game.model.Board.Contains(-1);
         }
 
         private void CheckHorizontalGroups()
