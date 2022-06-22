@@ -1,12 +1,17 @@
 using Game.Logic.State;
 using UniRx;
 using UnityEngine;
+using Utilities.Audio;
+using Zenject;
 
 namespace Game.Logic
 {
     public class GamePresenter : MonoBehaviour
     {
         [SerializeField] private GameView view;
+        
+        [Inject]
+        private IAudioManager _audioManager;
         
         public readonly GameModel model = new();
         
@@ -16,6 +21,8 @@ namespace Game.Logic
         {
             BindModelProperties();
             BindViewCallbacks();
+            
+            _audioManager.PlayBGM("Emoja");
             
             SetState(new InitState(this));
         }
