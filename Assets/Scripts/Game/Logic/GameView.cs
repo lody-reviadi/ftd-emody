@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Game.Data;
 using Game.Object;
 using UnityEngine;
 using UnityEngine.Events;
@@ -26,7 +27,7 @@ namespace Game.Logic
         [SerializeField] private List<GridButton> gridButtons;
         [HideInInspector]
         public UnityEvent<int, int> onGridClickedEvent = new();
-        
+
         private void Awake()
         {
             foreach (var gridButton in gridButtons)
@@ -38,6 +39,16 @@ namespace Game.Logic
         private void OnGridClicked(int col, int row)
         {
             onGridClickedEvent.Invoke(col, row);
+        }
+        
+        public void SetCookieSprites(int index, int cookieIndex)
+        {
+            if (index < 0 || index > gridButtons.Count)
+            {
+                return;
+            }
+
+            gridButtons[index].SetCookieSprites(cookieIndex);
         }
     }
 }

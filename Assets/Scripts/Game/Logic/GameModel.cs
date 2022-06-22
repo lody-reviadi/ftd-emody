@@ -2,12 +2,14 @@ using Game.Helper;
 using Game.Object;
 using UniRx;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Game.Logic
 {
     public class GameModel
     {
+        public int Column { get; private set; }
+
+        public int Row { get; private set; }
         public IReadOnlyReactiveProperty<int> Score => _score;
 
         private readonly IntReactiveProperty _score = new();
@@ -28,6 +30,15 @@ namespace Game.Logic
         {
             _stage.Value = 1;
             _score.Value = 0;
+            
+            Column = 5;
+            Row = 5;
+            
+            _board.Clear();
+            for (var i = 0; i < Column * Row; i++)
+            {
+                _board.Add(-1);   
+            }
         }
 
         public void GenerateRandomDropData()
@@ -35,7 +46,7 @@ namespace Game.Logic
             var cookie1 = Random.Range(0, Variance);
             var cookie2 = Random.Range(0, Variance);
             var cookie3 = Random.Range(0, Variance);
-            
+
             var randomIndex1 = Random.Range(0, 4);
             var randomIndex2 = (randomIndex1 + Random.Range(1, 4)) % 4;
             
@@ -69,6 +80,34 @@ namespace Game.Logic
         {
             _drop.Value.DropDown();
             return _drop.Value.Depth;
+        }
+
+        public void SetCookieOnBoard(int col, int row, int cookieType)
+        {
+            var index = col + row * Column;
+
+            if ((_board[index] >= 0) && (cookieType >=0))
+            {
+                _board[index] = -1;
+                return;
+            }
+
+            _board[index] = cookieType;
+        }
+
+        public void ClearCookie(int index)
+        {
+            _board[index] = -1;
+        }
+
+        public int GetCookieType(int col, int row)
+        {
+            if ((col >= Column) || (row >= Row))
+            {
+                return -1;
+            }
+
+            return _board[col + row * Column];
         }
         
         public void UpdateScore(int add)

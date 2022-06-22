@@ -17,6 +17,35 @@ namespace Game.Object
         
         public int Column { get; private set; }
         public int Row { get; private set; }
+
+        public int Side1Column => Side1Pos switch
+        {
+            PositionType.Left => Column - 1,
+            PositionType.Right => Column + 1,
+            _ => Column
+        };
+
+        public int Side1Row => Side1Pos switch
+        {
+            PositionType.Bottom => Row - 1,
+            PositionType.Top => Row + 1,
+            _ => Row
+        };
+        
+        public int Side2Column => Side2Pos switch
+        {
+            PositionType.Left => Column - 1,
+            PositionType.Right => Column + 1,
+            _ => Column
+        };
+
+        public int Side2Row => Side2Pos switch
+        {
+            PositionType.Bottom => Row - 1,
+            PositionType.Top => Row + 1,
+            _ => Row
+        };
+        
         public int Depth { get; private set; }
 
         public readonly UnityEvent onInitialize = new();

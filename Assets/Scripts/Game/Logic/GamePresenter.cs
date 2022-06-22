@@ -36,6 +36,11 @@ namespace Game.Logic
             {
                 view.DropObject.Bind(dropData);
             }).AddTo(this);
+
+            model.Board.ObserveReplace().Subscribe((evt) =>
+            {
+                view.SetCookieSprites(evt.Index, evt.NewValue);
+            }).AddTo(this);
         }
 
         private void BindViewCallbacks()
