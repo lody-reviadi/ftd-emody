@@ -11,6 +11,7 @@ namespace Game.Logic.State
             base.EnterState();
             
             game.model.GenerateRandomDropData();
+            game.View.DropObject.gameObject.SetActive(true);
             
             game.SetState(new FallingState(game));
         }

@@ -9,6 +9,7 @@ namespace Game.Logic
     public class GamePresenter : MonoBehaviour
     {
         [SerializeField] private GameView view;
+        public GameView View => view;
         
         [Inject]
         private IAudioManager _audioManager;
@@ -34,6 +35,11 @@ namespace Game.Logic
 
             }).AddTo(this);
 
+            model.CookieCount.Subscribe((updatedCount) =>
+            {
+                view.UpdateCookieCounter(updatedCount);
+            }).AddTo(this);
+
             model.Stage.Subscribe((updatedStage) =>
             {
 
@@ -56,9 +62,10 @@ namespace Game.Logic
             view.OnRotateCWButtonClicked.AddListener(model.RotateDropCW);
             view.OnRotateCCWButtonClicked.AddListener(model.RotateDropCCW);
             view.onGridClickedEvent.AddListener(model.UpdateDropPosition);
+            view.OnDropButtonClicked.AddListener(model.InstantDrop);
         }
 
-        public void SetState(State.GameState newState)
+        public void SetState(GameState newState)
         {
             _currentState?.ExitState();
 

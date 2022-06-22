@@ -14,6 +14,9 @@ namespace Game.Logic
 
         private readonly IntReactiveProperty _score = new();
 
+        public IReadOnlyReactiveProperty<int> CookieCount => _cookieCount;
+        private readonly IntReactiveProperty _cookieCount = new();
+        
         public IReadOnlyReactiveProperty<int> Stage => _stage;
         private readonly  IntReactiveProperty _stage = new();
         
@@ -30,6 +33,7 @@ namespace Game.Logic
         {
             _stage.Value = 1;
             _score.Value = 0;
+            _cookieCount.Value = 99;
             
             Column = 5;
             Row = 5;
@@ -43,6 +47,13 @@ namespace Game.Logic
 
         public void GenerateRandomDropData()
         {
+            if (_cookieCount.Value <= 0)
+            {
+                return;
+            }
+            
+            _cookieCount.Value--;
+            
             var cookie1 = Random.Range(0, Variance);
             var cookie2 = Random.Range(0, Variance);
             var cookie3 = Random.Range(0, Variance);
@@ -80,6 +91,11 @@ namespace Game.Logic
         {
             _drop.Value.DropDown();
             return _drop.Value.Depth;
+        }
+
+        public void InstantDrop()
+        {
+            _drop.Value.InstantDrop();
         }
 
         public void SetCookieOnBoard(int col, int row, int cookieType)

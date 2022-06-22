@@ -140,6 +140,12 @@ namespace Game.Object
             onPositionUpdated.Invoke();
         }
 
+        public void InstantDrop()
+        {
+            Depth = 0;
+            onPositionUpdated.Invoke();
+        }
+
         public static DropData GetRandomData()
         {
             var cookie1 = Random.Range(0, 4);
