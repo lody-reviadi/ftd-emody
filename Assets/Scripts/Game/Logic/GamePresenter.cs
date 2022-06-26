@@ -13,6 +13,7 @@ namespace Game.Logic
         
         [Inject]
         private IAudioManager _audioManager;
+        public IAudioManager audioManager => _audioManager;
         
         public readonly GameModel model = new();
         
@@ -58,11 +59,35 @@ namespace Game.Logic
 
         private void BindViewCallbacks()
         {
-            view.OnChangeShapeButtonClicked.AddListener(model.ChangeDropShape);
-            view.OnRotateCWButtonClicked.AddListener(model.RotateDropCW);
-            view.OnRotateCCWButtonClicked.AddListener(model.RotateDropCCW);
+            view.OnChangeShapeButtonClicked.AddListener(ChangeShape);
+            view.OnRotateCWButtonClicked.AddListener(RotateCW);
+            view.OnRotateCCWButtonClicked.AddListener(RotateCCW);
             view.onGridClickedEvent.AddListener(model.UpdateDropPosition);
-            view.OnDropButtonClicked.AddListener(model.InstantDrop);
+            view.OnDropButtonClicked.AddListener(Drop);
+        }
+
+        private void ChangeShape()
+        {
+            _audioManager.Play("Change");
+            model.ChangeDropShape();
+        }
+
+        private void RotateCW()
+        {
+            _audioManager.Play("RotateCW");
+            model.RotateDropCW();
+        }
+
+        private void RotateCCW()
+        {
+            _audioManager.Play("RotateCCW");
+            model.RotateDropCCW();
+        }
+
+        private void Drop()
+        {
+            _audioManager.Play("Drop");
+            model.InstantDrop();
         }
 
         public void SetState(GameState newState)

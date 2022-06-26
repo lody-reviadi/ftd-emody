@@ -36,6 +36,8 @@ namespace Game.Logic.State
                 return false;
             }
             
+            game.audioManager.Play("Thud");
+            
             foreach (var i in _groupedIndex)
             {
                 game.model.ClearCookie(i);

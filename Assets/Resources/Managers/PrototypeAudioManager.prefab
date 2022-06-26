@@ -67,3 +67,38 @@ MonoBehaviour:
     loop: 1
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
+  - name: Thud
+    clip: {fileID: 8300000, guid: ae307aabacc0d8e4997fd686496a233f, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Change
+    clip: {fileID: 8300000, guid: 1fa3bc5eb41feeb4ea2c542735f8f047, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: RotateCCW
+    clip: {fileID: 8300000, guid: d3e10c7fb82fbc54ab5e216f49746eae, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: RotateCW
+    clip: {fileID: 8300000, guid: 6a67092fd98e31b42a6aa2f316b879a1, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Drop
+    clip: {fileID: 8300000, guid: da0bf24abfd6a6a48bd9d0b4afd50fba, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}

@@ -102,17 +102,18 @@ namespace Game.Logic
             _drop.Value.InstantDrop();
         }
 
-        public void SetCookieOnBoard(int col, int row, int cookieType)
+        public bool SetCookieOnBoard(int col, int row, int cookieType)
         {
             var index = col + row * Column;
 
             if ((_board[index] >= 0) && (cookieType >=0))
             {
                 _board[index] = -1;
-                return;
+                return false;
             }
 
             _board[index] = cookieType;
+            return true;
         }
 
         public void ClearCookie(int index)
