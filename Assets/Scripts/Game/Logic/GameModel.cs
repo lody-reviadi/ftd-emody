@@ -45,6 +45,8 @@ namespace Game.Logic
             {
                 _board.Add(-1);   
             }
+            
+            _board[12] = Random.Range(0, 4);
         }
 
         public void GenerateRandomDropData()
@@ -134,7 +136,7 @@ namespace Game.Logic
             
             SetStageVariables();
         }
-
+        
         public float GetGameTick()
         {
             return 1f - (_stage.Value - 1) * 0.02f;

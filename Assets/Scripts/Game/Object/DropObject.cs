@@ -226,9 +226,9 @@ namespace Game.Object
 
         private void UpdatePosition()
         {
-            transform.position = new Vector3(-2 + _data.Column, -2 + _data.Row, -9f);
+            transform.localPosition = new Vector3(-2 + _data.Column, -2 + _data.Row, -9f);
             transform.localScale = Vector3.one * (1f + _data.Depth * 0.05f);
-            SetAlpha(1f - _data.Depth * 0.05f);
+            SetAlpha(1f - _data.Depth * 0.03f);
         }
 
         private void SetAlpha(float alpha)
