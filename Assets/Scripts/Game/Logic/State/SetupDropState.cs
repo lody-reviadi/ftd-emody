@@ -11,6 +11,10 @@ namespace Game.Logic.State
         {
             base.EnterState();
             
+            game.View.SetThrowAnimation();
+            
+            game.SetControlActive(true);
+            
             game.model.GenerateRandomDropData();
             game.View.DropObject.gameObject.SetActive(true);
             

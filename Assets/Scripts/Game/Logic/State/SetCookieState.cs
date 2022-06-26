@@ -8,22 +8,13 @@ namespace Game.Logic.State
         {
         }
 
-        private float _cooldown = 1f;
-        
-        public override void FixedUpdate()
+        public override void EnterState()
         {
-            base.FixedUpdate();
-
-            _cooldown -= Time.fixedDeltaTime;
-
-            if (_cooldown > 0f)
-            {
-                return;
-            }
+            base.EnterState();
+            
+            game.View.OnEmodyAnimationEnd.AddListener(NextState);
             
             FinalizeCookieOnBoard();
-            
-            game.SetState(new CheckBoardState(game));
         }
 
         private void FinalizeCookieOnBoard()
@@ -43,11 +34,28 @@ namespace Game.Logic.State
             var side2Col = dropData.Side2Column;
             var side2Row = dropData.Side2Row;
             isSafelySet &= game.model.SetCookieOnBoard(side2Col, side2Row, dropData.Side2Id);
+            
+            game.SetControlActive(false);
 
-            if (!isSafelySet)
+            if (isSafelySet)
             {
-                game.audioManager.Play("Thud");
+                NextState();
+                return;
             }
+            
+            game.View.SetEatAnimation();
+            game.audioManager.Play("Thud");
+        }
+
+        private void NextState()
+        {
+            game.SetState(new CheckBoardState(game));
+        }
+
+        public override void ExitState()
+        {
+            game.View.OnEmodyAnimationEnd.RemoveListener(NextState);
+            base.ExitState();
         }
     }
 }

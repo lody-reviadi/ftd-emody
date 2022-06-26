@@ -14,18 +14,34 @@ namespace Game.Logic.State
         public override void EnterState()
         {
             base.EnterState();
-
+            
+            game.View.OnEmodyAnimationEnd.AddListener(NextState);
+            game.View.OnBoardReadyForInit.AddListener(InitNextStage);
+            game.View.OnNextStageAnimationEnd.AddListener(NextState);
+            
             _groupedIndex.Clear();
 
-            if (!CheckForGroups() 
-                && CheckGameClear())
-            {
-                game.model.NextStage();
-            }
+            if (CheckForGroups()) return;
             
-            game.SetState(new SetupDropState(game));
+            if (CheckGameClear())
+            {
+                game.View.SetNextStageAnimation();
+            }
+            else
+            {
+                NextState();
+            }
         }
 
+        private void InitNextStage()
+        {
+            game.model.NextStage();
+        }
+
+        private void NextState()
+        {
+            game.SetState(new SetupDropState(game));
+        }
         private bool CheckForGroups()
         {
             CheckHorizontalGroups();
@@ -35,6 +51,8 @@ namespace Game.Logic.State
             {
                 return false;
             }
+            
+            game.View.SetCryAnimation();
             
             game.audioManager.Play("Thud");
             
@@ -133,6 +151,15 @@ namespace Game.Logic.State
 
                 checkList.Clear();
             }
+        }
+
+        public override void ExitState()
+        {
+            game.View.OnEmodyAnimationEnd.RemoveListener(NextState);
+            game.View.OnBoardReadyForInit.RemoveListener(InitNextStage);
+            game.View.OnNextStageAnimationEnd.RemoveListener(NextState);
+            
+            base.ExitState();
         }
     }
 }

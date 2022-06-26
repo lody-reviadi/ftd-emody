@@ -18,6 +18,8 @@ namespace Game.Logic
         public readonly GameModel model = new();
         
         private IGameState _currentState;
+
+        private bool _isControlActive = false;
         
         private void Start()
         {
@@ -66,26 +68,52 @@ namespace Game.Logic
             view.OnDropButtonClicked.AddListener(Drop);
         }
 
+        public void SetControlActive(bool isActive)
+        {
+            _isControlActive = isActive;
+            view.DropObject.gameObject.SetActive(isActive);
+        }
+
         private void ChangeShape()
         {
+            if (!_isControlActive)
+            {
+                return;
+            }
+            
             _audioManager.Play("Change");
             model.ChangeDropShape();
         }
 
         private void RotateCW()
         {
+            if (!_isControlActive)
+            {
+                return;
+            }
+            
             _audioManager.Play("RotateCW");
             model.RotateDropCW();
         }
 
         private void RotateCCW()
         {
+            if (!_isControlActive)
+            {
+                return;
+            }
+            
             _audioManager.Play("RotateCCW");
             model.RotateDropCCW();
         }
 
         private void Drop()
         {
+            if (!_isControlActive)
+            {
+                return;
+            }
+            
             _audioManager.Play("Drop");
             model.InstantDrop();
         }

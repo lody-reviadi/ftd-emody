@@ -12,6 +12,13 @@ namespace Game.Logic
     {
         [SerializeField] private DropObject dropObject;
         public DropObject DropObject => dropObject;
+
+        [SerializeField] private Emody emody;
+        public UnityEvent OnEmodyAnimationEnd => emody.OnAnimationEnd;
+
+        [SerializeField] private GameBoardAnimator boardAnimator;
+        public UnityEvent OnBoardReadyForInit => boardAnimator.OnBoardReadyForInit;
+        public UnityEvent OnNextStageAnimationEnd => boardAnimator.OnNextStageAnimationEnd;
         
         [SerializeField] private TMP_Text stageCounter;
         [SerializeField] private string stageCounterFormat = "STAGE {0}";
@@ -78,6 +85,26 @@ namespace Game.Logic
         public void UpdateStageCounter(int stageNum)
         {
             stageCounter.text = string.Format(stageCounterFormat, stageNum);
+        }
+
+        public void SetNextStageAnimation()
+        {
+            boardAnimator.SetNextStageAnimation();
+        }
+
+        public void SetEatAnimation()
+        {
+            emody.SetEatAnimation();
+        }
+
+        public void SetThrowAnimation()
+        {
+            emody.SetThrowAnimation();
+        }
+
+        public void SetCryAnimation()
+        {
+            emody.SetCryAnimation();
         }
     }
 }
