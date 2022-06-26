@@ -102,3 +102,17 @@ MonoBehaviour:
     loop: 0
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
+  - name: Clear
+    clip: {fileID: 8300000, guid: ab638bb7e8382bc4a889a34882a38dce, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Next
+    clip: {fileID: 8300000, guid: c4a616d7315b5c9418dbcb21ace0276c, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}

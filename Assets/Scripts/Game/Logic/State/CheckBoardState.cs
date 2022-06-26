@@ -25,6 +25,7 @@ namespace Game.Logic.State
             
             if (CheckGameClear())
             {
+                game.audioManager.Play("Clear");
                 game.View.SetNextStageAnimation();
             }
             else
@@ -35,6 +36,7 @@ namespace Game.Logic.State
 
         private void InitNextStage()
         {
+            game.audioManager.Play("Next");
             game.model.NextStage();
         }
 
