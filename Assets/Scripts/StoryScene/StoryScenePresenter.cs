@@ -19,9 +19,10 @@ public class StoryScenePresenter : MonoBehaviour
     {
         BindViewCallbacks();
         BindModelSubscription();
-        model.Init();
         
         _audioManager.PlayBGM("Story");
+        
+        model.Init();
     }
 
     private void BindViewCallbacks()
