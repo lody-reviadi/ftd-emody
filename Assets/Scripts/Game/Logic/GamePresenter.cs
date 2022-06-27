@@ -31,7 +31,9 @@ namespace Game.Logic
 
         private void StartNewGame()
         {
-            _audioManager.PlayBGM("Emoja");
+            // 時間足りね。。。
+            var variance = PlayerPrefs.GetInt("Variance", 4);
+            _audioManager.PlayBGM(variance <=2 ? "Rising" : "Emoja");
             view.SetNewGame();
             
             SetState(new InitState(this));
