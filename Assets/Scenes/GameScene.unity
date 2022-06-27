@@ -2283,8 +2283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scriptableObjectInstallers:
-  - {fileID: 11400000, guid: b73de3f6035e94b8c9a3c5f8bc0ca0a3, type: 2}
+  _scriptableObjectInstallers: []
   _monoInstallers: []
   _installerPrefabs: []
   _autoRun: 1
@@ -3066,14 +3065,6 @@ PrefabInstance:
     - target: {fileID: 4668952772807322925, guid: 3ec29c7ef47374463a6cf4825c67c9a1, type: 3}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4668952772807322925, guid: 3ec29c7ef47374463a6cf4825c67c9a1, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 4668952772807322925, guid: 3ec29c7ef47374463a6cf4825c67c9a1, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 4668952772807322925, guid: 3ec29c7ef47374463a6cf4825c67c9a1, type: 3}
       propertyPath: m_LocalPosition.x

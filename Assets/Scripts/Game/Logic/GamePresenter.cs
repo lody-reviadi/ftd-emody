@@ -40,7 +40,7 @@ namespace Game.Logic
             SetState(new InitState(this));
         }
 
-        private void BackToTitleScreen()
+        private static void BackToTitleScreen()
         {
             SceneManager.LoadScene("TitleScreenScene");
         }
