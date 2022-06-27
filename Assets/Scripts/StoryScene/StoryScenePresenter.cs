@@ -4,16 +4,24 @@ using System.Collections.Generic;
 using Game.Logic.State;
 using UniRx;
 using UnityEngine;
+using Utilities.Audio;
+using Zenject;
 
 public class StoryScenePresenter : MonoBehaviour
 {
     [SerializeField] private StorySceneView view;
     public readonly StorySceneModel model = new StorySceneModel();
     
+    [Inject]
+    private IAudioManager _audioManager;
+    
     void Start()
     {
         BindViewCallbacks();
         BindModelSubscription();
+        
+        _audioManager.PlayBGM("Story");
+        
         model.Init();
     }
 

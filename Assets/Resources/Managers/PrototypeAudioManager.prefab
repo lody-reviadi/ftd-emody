@@ -123,3 +123,10 @@ MonoBehaviour:
     loop: 0
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
+  - name: Story
+    clip: {fileID: 8300000, guid: 5219c62330cf44470bcf2c5bae4ee113, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
