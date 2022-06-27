@@ -59,3 +59,5 @@ sysinfo.txt
 crashlytics-build.properties
 
 ProjectSettings/RiderScriptEditorPersistedState.asset
+mono_crash.0.0.json
+/Recordings/

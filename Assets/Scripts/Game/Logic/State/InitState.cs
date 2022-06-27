@@ -1,6 +1,6 @@
 namespace Game.Logic.State
 {
-    public class InitState : State.GameState
+    public class InitState : GameState
     {
         public InitState(GamePresenter managedGame) : base(managedGame)
         {
@@ -12,7 +12,20 @@ namespace Game.Logic.State
             
             game.model.InitGameModel();
             
+            game.View.OnGameStartNotificationEnd.AddListener(OnNotificationEnd);
+            
+            game.View.ShowGameStartNotification();
+        }
+        
+        private void OnNotificationEnd()
+        {
             game.SetState(new SetupDropState(game));
+        }
+        
+        public override void ExitState()
+        {
+            game.View.OnGameStartNotificationEnd.RemoveListener(OnNotificationEnd);
+            base.ExitState();
         }
     }
 }

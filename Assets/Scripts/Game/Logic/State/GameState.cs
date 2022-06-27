@@ -9,7 +9,7 @@ namespace Game.Logic.State
     
     public abstract class GameState : IGameState
     {
-        protected GamePresenter game;
+        protected readonly GamePresenter game;
 
         protected GameState(GamePresenter managedGame)
         {
