@@ -59,11 +59,15 @@ public class StorySceneModel
 
     public void OnClickSkipButton()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("GameScene");
     }
 
     public void OnClickTextPlayButton()
     {
+        if (_currentStoryIndex.Value == _storyDatas.stories.Length - 1)
+        {
+            SceneManager.LoadScene("GameScene");
+        }
         _currentStoryIndex.Value = Mathf.Min(
             _currentStoryIndex.Value + 1, _storyDatas.stories.Length - 1
             );

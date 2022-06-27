@@ -42,7 +42,7 @@ public class TitleScreenModel
             {
                 int variance = _difficultyDatas[i].varianceCount;
                 PlayerPrefs.SetInt("Variance", variance);
-                SceneManager.LoadScene("SampleScene");
+                SceneManager.LoadScene("StoryScene");
             }
         }
     }
