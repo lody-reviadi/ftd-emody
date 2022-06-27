@@ -20,7 +20,7 @@ namespace Game.Logic
         public IReadOnlyReactiveCollection<int> Board => _board;
         private readonly ReactiveCollection<int> _board = new();
 
-        private const int Variance = 4;
+        private int _variance = 4;
         private const int InitialDepth = 10;
 
         public IReadOnlyReactiveProperty<DropData> Drop => _drop;
@@ -32,13 +32,15 @@ namespace Game.Logic
             
             Column = 5;
             Row = 5;
+
+            _variance = PlayerPrefs.GetInt("Variance", 4);
             
             SetStageVariables();
         }
 
         private void SetStageVariables()
         {
-            _cookieCount.Value = Mathf.Max((1 - (_stage.Value - 1) * 5), 10);
+            _cookieCount.Value = Mathf.Max((50 - (_stage.Value - 1) * 5), 10);
             
             _board.Clear();
             for (var i = 0; i < Column * Row; i++)
@@ -46,7 +48,7 @@ namespace Game.Logic
                 _board.Add(-1);   
             }
             
-            _board[12] = Random.Range(0, 4);
+            _board[12] = Random.Range(0, _variance);
         }
 
         public void GenerateRandomDropData()
@@ -58,9 +60,9 @@ namespace Game.Logic
             
             _cookieCount.Value--;
             
-            var cookie1 = Random.Range(0, Variance);
-            var cookie2 = Random.Range(0, Variance);
-            var cookie3 = Random.Range(0, Variance);
+            var cookie1 = Random.Range(0, _variance);
+            var cookie2 = Random.Range(0, _variance);
+            var cookie3 = Random.Range(0, _variance);
 
             var randomIndex1 = Random.Range(0, 4);
             var randomIndex2 = (randomIndex1 + Random.Range(1, 4)) % 4;
@@ -140,7 +142,7 @@ namespace Game.Logic
         
         public float GetGameTick()
         {
-            return 1f - (_stage.Value - 1) * 0.02f;
+            return 1f - (_stage.Value - 1) * 0.025f;
         }
     }
 }
