@@ -110,6 +110,7 @@ namespace Game.Logic
 
             if ((_board[index] >= 0) && (cookieType >=0))
             {
+                Debug.LogError(_board[index]+" "+cookieType+" "+index);
                 _board[index] = -1;
                 return false;
             }
