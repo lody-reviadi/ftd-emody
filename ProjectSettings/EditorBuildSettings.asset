@@ -8,6 +8,15 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/TitleScreenScene.unity
+    guid: 0671e7f82a33343ffa7efd6480197e70
+  - enabled: 1
+    path: Assets/Scenes/StoryScene.unity
+    guid: 5b9cc07c22a974c0591b6f4a521431cd
+  - enabled: 1
+    path: Assets/Scenes/GameScene.unity
+    guid: 3fc8acdd13e6c734bafef6554d6fdbcd
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 5a4ffb94d4aea4aa3aadbada323b048a, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: f399412b37c6b47a3b88e30cf0caa0dc, type: 2}

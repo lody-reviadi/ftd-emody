@@ -1,6 +1,7 @@
 using Game.Logic.State;
 using UniRx;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Utilities.Audio;
 using Zenject;
 
@@ -39,6 +40,11 @@ namespace Game.Logic
             SetState(new InitState(this));
         }
 
+        private void BackToTitleScreen()
+        {
+            SceneManager.LoadScene("TitleScreenScene");
+        }
+
         private void BindModelProperties()
         {
             model.CookieCount.Subscribe((updatedCount) =>
@@ -75,6 +81,7 @@ namespace Game.Logic
             view.onGridClickedEvent.AddListener(model.UpdateDropPosition);
             view.OnDropButtonClicked.AddListener(Drop);
             view.OnRetryButtonClicked.AddListener(StartNewGame);
+            view.OnTitleButtonClicked.AddListener(BackToTitleScreen);
         }
 
         public void SetControlActive(bool isActive)
