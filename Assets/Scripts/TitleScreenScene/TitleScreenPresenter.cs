@@ -19,7 +19,7 @@ public class TitleScreenPresenter : MonoBehaviour
     {
         BindViewCallbacks();
         BindModelSubscription();
-        _audioManager.Play("Title");
+        _audioManager.PlayBGM("Title");
     }
 
     private void BindViewCallbacks()
