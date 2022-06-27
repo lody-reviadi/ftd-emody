@@ -25,6 +25,7 @@ public class TitleScreenPresenter : MonoBehaviour
     private void BindViewCallbacks()
     {
         view.onStartButtonClicked.AddListener(model.OnStartButtonClicked);
+        view.onDifficultyButtonClickedEvent.AddListener(model.OnDifficultyButtonClicked);
     }
 
     private void BindModelSubscription()
