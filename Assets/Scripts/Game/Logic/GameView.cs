@@ -45,6 +45,12 @@ namespace Game.Logic
 
         [SerializeField] private CommonNotification gameStartNotification;
         public UnityEvent OnGameStartNotificationEnd => gameStartNotification.OnShowNotificationEndEvent;
+
+        [SerializeField] private GameObject gameOverScreen;
+        [SerializeField] private Button retryButton;
+        public Button.ButtonClickedEvent OnRetryButtonClicked => retryButton.onClick;
+        [SerializeField] private Button titleButton;
+        public Button.ButtonClickedEvent OnTitleButtonClicked => titleButton.onClick;
         
 
         private void Awake()
@@ -105,6 +111,18 @@ namespace Game.Logic
         public void SetCryAnimation()
         {
             emody.SetCryAnimation();
+        }
+
+        public void SetNewGame()
+        {
+            emody.ResetToKneadAnimation();
+            gameOverScreen.SetActive(false);
+        }
+        
+        public void SetGameOver()
+        {
+            emody.SetCryLoopAnimation();
+            gameOverScreen.SetActive(true);
         }
     }
 }

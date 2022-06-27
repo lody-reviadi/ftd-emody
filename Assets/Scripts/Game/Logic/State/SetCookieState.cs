@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Game.Logic.State
 {
     public class SetCookieState : GameState
@@ -44,7 +42,7 @@ namespace Game.Logic.State
             }
             
             game.View.SetEatAnimation();
-            game.audioManager.Play("Thud");
+            game.AudioManager.Play("Thud");
         }
 
         private void NextState()

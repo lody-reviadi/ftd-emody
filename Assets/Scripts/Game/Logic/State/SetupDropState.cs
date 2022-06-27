@@ -10,6 +10,12 @@ namespace Game.Logic.State
         public override void EnterState()
         {
             base.EnterState();
+
+            if (game.model.CookieCount.Value <= 0)
+            {
+                game.SetState(new GameOverState(game));
+                return;
+            }
             
             game.View.SetThrowAnimation();
             

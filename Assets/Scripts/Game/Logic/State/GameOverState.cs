@@ -10,7 +10,8 @@ namespace Game.Logic.State
         {
             base.EnterState();
             
-            game.View.SetCryAnimation();
+            game.AudioManager.Play("GameOver");
+            game.View.SetGameOver();
         }
     }
 }

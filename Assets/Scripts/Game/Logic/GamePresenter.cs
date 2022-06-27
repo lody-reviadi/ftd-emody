@@ -13,7 +13,7 @@ namespace Game.Logic
         
         [Inject]
         private IAudioManager _audioManager;
-        public IAudioManager audioManager => _audioManager;
+        public IAudioManager AudioManager => _audioManager;
         
         public readonly GameModel model = new();
         
@@ -26,7 +26,13 @@ namespace Game.Logic
             BindModelProperties();
             BindViewCallbacks();
             
+            StartNewGame();
+        }
+
+        private void StartNewGame()
+        {
             _audioManager.PlayBGM("Emoja");
+            view.SetNewGame();
             
             SetState(new InitState(this));
         }
@@ -66,6 +72,7 @@ namespace Game.Logic
             view.OnRotateCCWButtonClicked.AddListener(RotateCCW);
             view.onGridClickedEvent.AddListener(model.UpdateDropPosition);
             view.OnDropButtonClicked.AddListener(Drop);
+            view.OnRetryButtonClicked.AddListener(StartNewGame);
         }
 
         public void SetControlActive(bool isActive)

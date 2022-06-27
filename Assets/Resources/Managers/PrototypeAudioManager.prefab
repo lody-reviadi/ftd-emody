@@ -116,3 +116,10 @@ MonoBehaviour:
     loop: 0
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
+  - name: GameOver
+    clip: {fileID: 8300000, guid: 5ba104612b6480e48a55a70bb0e8d933, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}

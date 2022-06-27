@@ -25,7 +25,7 @@ namespace Game.Logic.State
             
             if (CheckGameClear())
             {
-                game.audioManager.Play("Clear");
+                game.AudioManager.Play("Clear");
                 game.View.SetNextStageAnimation();
             }
             else
@@ -36,7 +36,7 @@ namespace Game.Logic.State
 
         private void InitNextStage()
         {
-            game.audioManager.Play("Next");
+            game.AudioManager.Play("Next");
             game.model.NextStage();
         }
 
@@ -56,7 +56,7 @@ namespace Game.Logic.State
             
             game.View.SetCryAnimation();
             
-            game.audioManager.Play("Thud");
+            game.AudioManager.Play("Thud");
             
             foreach (var i in _groupedIndex)
             {

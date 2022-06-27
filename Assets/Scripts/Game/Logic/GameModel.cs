@@ -38,7 +38,7 @@ namespace Game.Logic
 
         private void SetStageVariables()
         {
-            _cookieCount.Value = Mathf.Max((100 - (_stage.Value - 1) * 5), 15);
+            _cookieCount.Value = Mathf.Max((1 - (_stage.Value - 1) * 5), 10);
             
             _board.Clear();
             for (var i = 0; i < Column * Row; i++)

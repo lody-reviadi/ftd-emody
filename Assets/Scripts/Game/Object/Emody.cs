@@ -9,6 +9,8 @@ namespace Game.Object
         [SerializeField] private string cryTrigger = "Cry";
         [SerializeField] private string eatTrigger = "Eat";
         [SerializeField] private string throwTrigger = "Throw";
+        [SerializeField] private string cryLoopTrigger = "CryLoop";
+        [SerializeField] private string kneadTrigger = "Knead";
         public UnityEvent OnAnimationEnd { get; } = new();
         
         public void SetEatAnimation()
@@ -24,6 +26,16 @@ namespace Game.Object
         public void SetCryAnimation()
         {
             animator.SetTrigger(cryTrigger);
+        }
+
+        public void SetCryLoopAnimation()
+        {
+            animator.SetTrigger(cryLoopTrigger);
+        }
+
+        public void ResetToKneadAnimation()
+        {
+            animator.SetTrigger(kneadTrigger);
         }
         
         public void NotifyAnimationEnd()
