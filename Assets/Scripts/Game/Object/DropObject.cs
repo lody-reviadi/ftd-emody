@@ -17,6 +17,35 @@ namespace Game.Object
         
         public int Column { get; private set; }
         public int Row { get; private set; }
+
+        public int Side1Column => Side1Pos switch
+        {
+            PositionType.Left => Column - 1,
+            PositionType.Right => Column + 1,
+            _ => Column
+        };
+
+        public int Side1Row => Side1Pos switch
+        {
+            PositionType.Bottom => Row - 1,
+            PositionType.Top => Row + 1,
+            _ => Row
+        };
+        
+        public int Side2Column => Side2Pos switch
+        {
+            PositionType.Left => Column - 1,
+            PositionType.Right => Column + 1,
+            _ => Column
+        };
+
+        public int Side2Row => Side2Pos switch
+        {
+            PositionType.Bottom => Row - 1,
+            PositionType.Top => Row + 1,
+            _ => Row
+        };
+        
         public int Depth { get; private set; }
 
         public readonly UnityEvent onInitialize = new();
@@ -111,6 +140,12 @@ namespace Game.Object
             onPositionUpdated.Invoke();
         }
 
+        public void InstantDrop()
+        {
+            Depth = 0;
+            onPositionUpdated.Invoke();
+        }
+
         public static DropData GetRandomData()
         {
             var cookie1 = Random.Range(0, 4);
@@ -191,9 +226,9 @@ namespace Game.Object
 
         private void UpdatePosition()
         {
-            transform.position = new Vector3(-2 + _data.Column, -2 + _data.Row, -9f);
+            transform.localPosition = new Vector3(-2 + _data.Column, -2 + _data.Row, -9f);
             transform.localScale = Vector3.one * (1f + _data.Depth * 0.05f);
-            SetAlpha(1f - _data.Depth * 0.05f);
+            SetAlpha(1f - _data.Depth * 0.03f);
         }
 
         private void SetAlpha(float alpha)

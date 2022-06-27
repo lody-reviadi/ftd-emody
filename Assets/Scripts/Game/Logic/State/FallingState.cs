@@ -37,7 +37,7 @@ namespace Game.Logic.State
                 return;
             }
 
-            game.SetState(new SetupDropState(game));
+            game.SetState(new SetCookieState(game));
         }
     }
 }
