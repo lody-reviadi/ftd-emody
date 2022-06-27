@@ -2,12 +2,8 @@
   "stories":
   [
     {
-      "text": "ここは町のお菓子屋さん\n今日もエモディは大好きなクッキーを作るのに夢中\nどうやら今日は町中の人がエモディのクッキーを欲しがっているみたい\nエモディのクッキーはおいしくなる魔法がかかっている\n色んな種類のクッキーを並べないとその魔法は発動しない\nさあ、エモディは町の人たちにクッキーを食べさせてあげられるのだろうか",
-      "background": 1
-    },
-    {
-      "text": "Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit,\nsed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\nUt enim ad minim veniam,\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\nExcepteur sint occaecat cupidatat non proident,\nsunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "background": 2
+     "text": "ここは町のお菓子屋さん\nエモディは大好きなクッキーを作るのに夢中\nエモディのクッキーは色んな種類を並べるとあら不思議！\n食べると幸せになれる特別な魔法がかかっている\nどうやら今日は町中の人がエモディのクッキーを欲しがっているみたい\nさあ、エモディはクッキー作りでみんなを幸せにしてあげられるのだろうか...",
+     "background": 1
     }
   ]
 }
