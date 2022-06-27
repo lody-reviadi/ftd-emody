@@ -23,8 +23,11 @@ public class TitleScreenModel
 
     private DifficultyData[] _difficultyDatas = new[]
     {
+        // NORMAL
         new DifficultyData(0, 4),
+        // HARD
         new DifficultyData(1, 3),
+        // THIS IS FIRE
         new DifficultyData(2, 2)
     };
     
@@ -35,7 +38,6 @@ public class TitleScreenModel
 
     public void OnDifficultyButtonClicked(int indexId)
     {
-        Debug.Log("OnDifficultyButtonClicked: " + indexId);
         for (int i = 0; i < _difficultyDatas.Length; i++)
         {
             if (_difficultyDatas[i].indexId == indexId)
