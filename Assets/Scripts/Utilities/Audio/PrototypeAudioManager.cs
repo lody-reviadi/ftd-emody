@@ -25,6 +25,7 @@ namespace Utilities.Audio
             else
             {
                 _instance = this;
+                DontDestroyOnLoad(gameObject);
             }
 
             for (var i = 0; i < sounds.Length; i++)
